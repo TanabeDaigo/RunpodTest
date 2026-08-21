@@ -1,0 +1,126 @@
+{
+  "name": "@repo/common",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/config/index.js",
+      "require": "./src/config/index.js"
+    },
+    "./client": {
+      "import": "./src/client/index.js",
+      "require": "./src/client/index.js"
+    },
+    "./server": {
+      "import": "./src/server/index.js",
+      "require": "./src/server/index.js"
+    },
+    "./server/*": {
+      "import": "./src/server/*.js",
+      "require": "./src/server/*.js"
+    },
+    "./server/service/*": {
+      "import": "./src/server/service/*.js",
+      "require": "./src/server/service/*.js"
+    },
+    "./config": {
+      "import": "./src/config/index.js",
+      "require": "./src/config/index.js"
+    },
+    "./config/*": {
+      "import": "./src/config/*.js",
+      "require": "./src/config/*.js"
+    },
+    "./utils": {
+      "import": "./src/utils/index.js",
+      "require": "./src/utils/index.js"
+    },
+    "./dao": {
+      "import": "./src/server/dao/index.js",
+      "require": "./src/server/dao/index.js"
+    },
+    "./dao/*": {
+      "import": "./src/server/dao/*.js",
+      "require": "./src/server/dao/*.js"
+    },
+    "./logic": {
+      "import": "./src/server/logic/index.js",
+      "require": "./src/server/logic/index.js"
+    },
+    "./logic/*": {
+      "import": "./src/server/logic/*.js",
+      "require": "./src/server/logic/*.js"
+    },
+    "./service": {
+      "import": "./src/server/service/index.js",
+      "require": "./src/server/service/index.js"
+    },
+    "./service/*": {
+      "import": "./src/server/service/*.js",
+      "require": "./src/server/service/*.js"
+    },
+    "./styles": {
+      "import": "./src/styles/index.js",
+      "require": "./src/styles/index.js"
+    },
+    "./styles/*": {
+      "import": "./src/styles/*",
+      "require": "./src/styles/*"
+    },
+    "./client/pages": {
+      "import": "./src/client/pages/index.js",
+      "require": "./src/client/pages/index.js"
+    },
+    "./client/pages/*": {
+      "import": "./src/client/pages/*.js",
+      "require": "./src/client/pages/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "generate:component": "turbo gen react-component",
+    "check-types": "tsc --noEmit",
+    "clear": "npm cache verify & npm cache clean --force & pnpm store prune --force",
+    "gen:db": "node -r dotenv/config ./scripts/generate_db.js dotenv_config_path=../../env/.env.development",
+    "gen:db:staging": "node -r dotenv/config ./scripts/generate_db.js dotenv_config_path=../../env/.env.staging",
+    "gen:db:prod": "node -r dotenv/config ./scripts/generate_db.js dotenv_config_path=../../env/.env.production",
+    "gen:form": "node ./scripts/generate_all_FormEx.js",
+    "gen:form_test": "node ./scripts/generate_unit_test_formEx.js",
+    "gen:dao": "node ./scripts/generate_dao.js",
+    "gen:dao_test": "node ./scripts/generate_unit_test_dao.js",
+    "gen:all": "pnpm run gen:db && pnpm run gen:form && pnpm run gen:form_test && pnpm run gen:dao && pnpm run gen:dao_test ",
+    "build": "tsc",
+    "build:staging": "tsc",
+    "build:prod": "tsc"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@krono-metro/metrojs": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@turbo/gen": "^2.4.4",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.5.0",
+    "eslint": "^9.21.0",
+    "mysql2": "^3.14.0",
+    "pg": "^8.14.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.5",
+    "sequelize-auto": "^0.8.8",
+    "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.0.2",
+    "cross-env": "^7.0.3",
+    "oracledb": "^6.9.0",
+    "prop-types": "^15.8.1",
+    "reflect-metadata": "^0.2.1",
+    "tsyringe": "^4.8.0"
+  }
+}

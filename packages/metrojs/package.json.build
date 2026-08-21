@@ -1,0 +1,56 @@
+{
+  "name": "@krono-metro/metrojs",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/server/index.js",
+  "browser": "./dist/client/index.js",
+  "types": "./dist/server/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/server/index.d.ts",
+      "import": "./dist/server/index.js"
+    },
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "import": "./dist/server/index.js"
+    },
+    "./client": {
+      "types": "./dist/client/index.d.ts",
+      "import": "./dist/client/index.js"
+    },
+    "./common": {
+      "types": "./dist/common/index.d.ts",
+      "import": "./dist/common/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "build": "tsc",
+    "clean": "node src/server/scripts/clean.js dist && pnpm run clear",
+    "clean:modules": "node src/server/scripts/clean.js node_modules",
+    "clean:all": "node src/server/scripts/clean.js dist node_modules",
+    "prebuild": "pnpm run clean",
+    "prepare": "pnpm run build",
+    "clear": "node src/server/scripts/clear-cache.js"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "react": "^18.2.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "eslint": "^9.0.0",
+    "minipass": "^7.1.1",
+    "mysql2": "^3.14.0",
+    "pg": "^8.14.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.5",
+    "typescript": "^5.8.3"
+  }
+}

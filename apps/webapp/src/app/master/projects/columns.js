@@ -1,0 +1,68 @@
+// プロジェクト一覧の列定義
+export const projectColumns = [
+  {
+    label: "",
+    dataKey: "_edit",
+    width: 40,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    label: "ID",
+    dataKey: "project_id",
+    width: 80,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    label: "プロジェクト名称",
+    dataKey: "project_name",
+    width: 180,
+    align: "left",
+    headerAlign: "center",
+    threePoint: true,
+  },
+  {
+    label: "DBMS",
+    dataKey: "dbms_name",
+    width: 80,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    label: "サーバー",
+    dataKey: "db_server",
+    width: 160,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    label: "DB名",
+    dataKey: "db_name",
+    width: 160,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    label: "コメント",
+    dataKey: "comments",
+    width: 200,
+    align: "left",
+    headerAlign: "center",
+    threePoint: true,
+  },
+  {
+    label: "更新者",
+    dataKey: "update_user",
+    width: 100,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    label: "更新日時",
+    dataKey: "updated_at",
+    width: 240,
+    align: "center",
+    headerAlign: "center",
+  },
+];

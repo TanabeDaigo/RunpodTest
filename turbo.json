@@ -1,0 +1,49 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["env/.env.*"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "env/.env.*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "build:staging": {
+      "dependsOn": ["^build:staging"],
+      "inputs": ["$TURBO_DEFAULT$", "env/.env.*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "build:prod": {
+      "dependsOn": ["^build:prod"],
+      "inputs": ["$TURBO_DEFAULT$", "env/.env.*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "cache": true
+    },
+    "build:sourcemap": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "env/.env.*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "build:staging:sourcemap": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "env/.env.*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "clear": {
+      "cache": false
+    }
+  },
+  "globalEnv": ["LOG_LEVEL", "ENVIRONMENT", "SESSION_SECRET", "PORT", "DATABASE", "DB_HOST", "DB_USER", "DB_PASS", "DB_DIALECT", "SESSION_TOKEN_NAME", "CALLBACK_URL_NAME", "CSRF_TOKEN_NAME", "OLLAMA_BASE_URL", "OLLAMA_MODEL", "OLLAMA_EMBED_MODEL", "OLLAMA_TIMEOUT_MS", "QDRANT_URL", "QDRANT_COLLECTION", "QDRANT_VECTOR_SIZE", "QDRANT_TIMEOUT_MS", "LLM_PG_HOST", "LLM_PG_PORT", "LLM_PG_USER", "LLM_PG_PASSWORD", "LLM_PG_DATABASE", "TAVILY_API_KEY", "TAVILY_SEARCH_DEPTH", "TAVILY_MAX_RESULTS", "GEMINI_API_KEY", "GEMINI_MODEL", "GEMINI_LLM_MODEL", "GEMINI_SEARCH_MODEL", "AI_GATEWAY_BASE_URL", "AI_GATEWAY_API_KEY", "RUNPOD_API_KEY", "RUNPOD_ENDPOINT_ID", "RUNPOD_API_BASE", "RUNPOD_OPS", "RUNPOD_OLLAMA_MODEL", "RUNPOD_POLL_TIMEOUT_MS", "RUNPOD_POLL_INTERVAL_MS"]
+}

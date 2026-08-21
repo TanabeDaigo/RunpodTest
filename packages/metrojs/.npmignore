@@ -1,0 +1,21 @@
+# ソースコード
+src/
+
+# 設定ファイル
+.eslintrc.js
+.prettierrc
+tsconfig.json
+tsconfig.*.json
+
+# テストファイル
+__tests__/
+*.test.js
+*.test.ts
+*.test.tsx
+
+# その他
+.gitignore
+.editorconfig
+README.md
+CHANGELOG.md
+LICENSE 

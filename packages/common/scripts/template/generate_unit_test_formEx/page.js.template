@@ -1,0 +1,100 @@
+/**
+ * ╔═══════════════════════════════════════════════════════════════╗
+ * ║                                                               ║
+ * ║   MetroJS - {{name}} Test Page                               ║
+ * ║   Copyright (c) 2024 Metro Digital Solutions                  ║
+ * ║                                                               ║
+ * ║   {{name}}コンポーネントのテストページ                           ║
+ * ║                                                               ║
+ * ╚═══════════════════════════════════════════════════════════════╝
+ *
+ * このファイルは{{name}}コンポーネントのテストページを定義します。
+ * 各関数の動作確認とコード例の表示を行います。
+ *
+ * @file page.js
+ * @module unit_test/{{name}}/page
+ */
+
+"use client";
+
+import { useUnitTest } from "./useUnitTest";
+import { logjs, providers } from "@lib/client";
+import { TestDialogGrid, TestDialogCard, TestDialogTitle, TestDialogDescription, TestDialogHeader, TestDialogMainTitle, CodeBlock, ButtonContainer } from "../styles";
+import { useEffect } from "react";
+
+const { useWebAppContext } = providers;
+const log = new logjs("Test{{name}}");
+
+// ページレンダリング
+function Page() {
+  const webAppContext = useWebAppContext();
+  const { state, actions } = webAppContext || {};
+  log.info("state", state);
+  log.info("actions", actions);
+  const [form, formProps] = useUnitTest({}, state, actions);
+
+  // ページタイトルを設定
+  useEffect(() => {
+    actions.setPageTitle("{{title}}");
+  }, [actions]);
+
+  // コード例を生成する関数
+  const generateCodeExample = (functionName, params = {}) => {
+    const paramStr = Object.keys(params).length > 0 ? JSON.stringify(params, null, 2).replace(/"/g, "'") : "";
+    return `// ${functionName}の使用例
+const [form, formProps] = hooks.useFormEx();
+
+// 基本的な使用
+formProps.${functionName}(${paramStr})
+
+// デバッグモード付き
+formProps.${functionName}(${paramStr  || "{}"}, true)`;
+  };
+
+  // コピー機能
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    actions.showAlert("成功", "コードをクリップボードにコピーしました");
+  };
+
+  return (
+    <div>
+      <TestDialogHeader>
+        <TestDialogMainTitle>{{title}}</TestDialogMainTitle>
+      </TestDialogHeader>
+      <div>
+        <TestDialogGrid>
+          {/* 基本情報 */}
+          <TestDialogCard>
+            <TestDialogTitle>{{name}} について</TestDialogTitle>
+            <TestDialogDescription>
+              <p>{{description}}</p>
+              <div style={{ marginTop: "1rem" }}>
+                <CodeBlock>{`// {{name}}の基本的な使用例
+const [form, formProps] = hooks.{{name}}();
+
+// フォームの初期化
+formProps.init();
+
+// 各関数の使用例
+{{allFunctions}}`}</CodeBlock>
+              </div>
+            </TestDialogDescription>
+          </TestDialogCard>
+
+          {{basicFunctions}}
+
+          {{statusFunctions}}
+
+          {{mailFunctions}}
+
+          {{personalFunctions}}
+
+          {{otherFunctions}}
+        </TestDialogGrid>
+      </div>
+    </div>
+  );
+}
+
+export default Page;

@@ -1,0 +1,28 @@
+/**
+ *
+ * KronoMetro
+ *
+ * Copyright © 2024-present KronoMetro, Co. All rights reserved.
+ *
+ */
+import { injectable } from "tsyringe";
+import { AbstractObject as Abstract } from "@common/server";
+import { logjs, models } from "@lib/server";
+
+const log = new logjs("TestDaoController");
+
+/**
+ * DAOテスト用のコントローラークラス
+ * 各DAOファイルのfind関数の動作確認を行う
+ */
+@injectable()
+class TestDaoController extends Abstract {
+  constructor() {
+    super();
+    log.debug("constructor START!!");
+  }
+
+{{daoMethods}}
+}
+
+export default TestDaoController;

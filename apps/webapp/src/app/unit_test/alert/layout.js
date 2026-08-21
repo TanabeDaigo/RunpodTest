@@ -1,0 +1,36 @@
+/**
+ * ╔═══════════════════════════════════════════════════════════════╗
+ * ║                                                               ║
+ * ║   MetroJS - Alert Test Layout                                ║
+ * ║   Copyright (c) 2024 Metro Digital Solutions                  ║
+ * ║                                                               ║
+ * ║   Alertコンポーネントのテストレイアウト                       ║
+ * ║                                                               ║
+ * ╚═══════════════════════════════════════════════════════════════╝
+ *
+ * このファイルはAlertコンポーネントのテストページのレイアウトを定義します。
+ * メタデータの設定とレイアウトの提供を行います。
+ *
+ * @file layout.js
+ * @module unit_test/alert/layout
+ */
+import Consts from "@common/config/consts";
+
+/**
+ * ページのメタデータ
+ * @type {Object}
+ */
+export const metadata = {
+  title: `Alert テスト | ${Consts.NAME}`,
+  description: "Alertコンポーネントのテストページ",
+};
+
+/**
+ * レイアウトコンポーネント
+ * @param {Object} props - コンポーネントのプロパティ
+ * @param {React.ReactNode} props.children - 子要素
+ * @returns {JSX.Element} レイアウトコンポーネント
+ */
+export default function Layout({ children }) {
+  return children;
+}

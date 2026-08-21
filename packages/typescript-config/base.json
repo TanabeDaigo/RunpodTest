@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"],
+      "@utils/*": ["./utils/*"],
+      "@config/*": ["./config/*"],
+      "@components/*": ["./components/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@html/*": ["./html/*"],
+      "@pages/*": ["./pages/*"],
+      "@middlewares/*": ["./middlewares/*"],
+      "@server/*": ["./server/*"],
+      "@lib/*": ["./lib/*"],
+      "@instrumentation": ["./instrumentation.js"],
+      "@metrojs/*": ["../node_modules/@krono-metro/metrojs/*"],
+      "@common/*": ["../node_modules/@repo/common/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "node_modules/@repo/common/src/**/*.js", "node_modules/@krono-metro/metrojs/src/**/*.js", "src/instrumentation.js"],
+  "exclude": ["node_modules", "src/**/__tests__/*"]
+}

@@ -1,0 +1,10 @@
+{
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 200,
+  "editor.wrappingIndent": "same"
+}

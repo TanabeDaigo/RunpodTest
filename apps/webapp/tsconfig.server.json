@@ -1,0 +1,33 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    //"module": "commonjs",
+    "baseUrl": "src/",
+    "allowJs": true,
+    "outDir": "dist",
+    "lib": [
+      "ESNext"
+    ],
+    "moduleResolution": "node",
+    "isolatedModules": false,
+    "noEmit": false,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    //"allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    //"typeRoots": [
+    //  "./node_modules/@types"
+    //]
+  },
+  //"ts-node": {
+  //  "esm": true
+  //},
+  "include": [
+    "./server/index.js",
+    "./src/utils/*",
+    "./src/config/*",
+  ]
+}

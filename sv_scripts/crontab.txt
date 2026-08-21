@@ -1,0 +1,2 @@
+0 4 * * * /bin/sh /var/##SYSTEM_NAME##/sbin/sv_scripts/dbbackup.sh >> /var/##SYSTEM_NAME##/logs/sv_scripts/dbbackup.log 2>&1
+*/5 * * * * /bin/sh /var/##SYSTEM_NAME##/sbin/sv_scripts/checklog.sh >> /var/##SYSTEM_NAME##/logs/sv_scripts/checklog.log

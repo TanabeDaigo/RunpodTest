@@ -1,0 +1,16 @@
+export default {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        targets: { node: "current" },
+        modules: false,
+      },
+    ],
+    "@babel/preset-react",
+  ],
+  assumptions: {
+    setPublicClassFields: true,
+    privateFieldsAsProperties: true,
+  },
+};

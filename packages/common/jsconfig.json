@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@metrojs/*": ["node_modules/@krono-metro/metrojs/*"]
+    }
+  }
+}

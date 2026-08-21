@@ -1,0 +1,19 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "ecmascript",
+      "comments": true
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic"
+      }
+    },
+    "target": "es2020",
+    "loose": true
+  },
+  "minify": true,
+  "module": {
+    "type": "es6"
+  }
+}

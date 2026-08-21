@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@metrojs/*": ["packages/metrojs/src/*"],
+      "@common/*": ["packages/common/src/*"]
+    }
+  }
+}

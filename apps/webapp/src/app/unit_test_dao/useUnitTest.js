@@ -1,0 +1,177 @@
+/**
+ * ╔═══════════════════════════════════════════════════════════════╗
+ * ║                                                               ║
+ * ║   MetroJS - DAO Unit Test Hook                                ║
+ * ║   Copyright (c) 2024 Metro Digital Solutions                  ║
+ * ║                                                               ║
+ * ║   DAOファイルのfind関数テスト用カスタムフック                      ║
+ * ║                                                               ║
+ * ╚═══════════════════════════════════════════════════════════════╝
+ *
+ * このファイルはDAOファイルのfind関数テストページで使用される
+ * カスタムフックを定義します。API実行、結果表示、エラーハンドリングなどを提供します。
+ *
+ * @file useUnitTest.js
+ * @module unit_test_dao/useUnitTest
+ */
+
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { logjs, apijs, hooks } from "@lib/client";
+
+const log = new logjs("unit_test_dao/useUnitTest");
+const api = new apijs("api/TestDao");
+
+/**
+ * DAOテスト用カスタムフック
+ * @param {Object} initState - 初期状態
+ * @param {Object} state - アプリケーション状態
+ * @param {Object} actions - アクション関数
+ * @returns {Array} [form, formProps] フォーム状態とプロパティ
+ */
+export const useUnitTest = (initState = {}, state, actions) => {
+  const router = useRouter();
+
+  const [form, formProps] = hooks.useFormEx(initState);
+  const [testResults, setTestResults] = useState({});
+  const [loading, setLoading] = useState({});
+
+  // DAOファイルのリスト
+  const daoList = [
+    "AutoMakeItemsDao",
+    "AutoMakeTestDao",
+    "CategoriesDao",
+    "CommonsDao",
+    "ComponentExplansDao",
+    "CompornentExplansDao",
+    "DbmsDao",
+    "IndustriesDao",
+    "PrefecturesDao",
+    "ProjectsDao",
+    "SettingsDao",
+    "SrcTemplatesDao",
+    "StatusDao",
+    "UnitTestDao",
+    "UsersDao",
+  ];
+
+  /**
+   * 指定されたDAOのfind関数をテストする
+   * @param {string} daoName - DAO名
+   */
+  const executeDaoTest = async (daoName) => {
+    setLoading((prev) => ({ ...prev, [daoName]: true }));
+
+    try {
+      const res = await api.post({
+        mode: `find_${daoName}`,
+        params: form,
+      });
+
+      log.debug(`${daoName} test result:`, res);
+
+      // APIレスポンスのresultプロパティをチェック
+      if (res.result === false) {
+        // エラーとして処理
+        setTestResults((prev) => ({
+          ...prev,
+          [daoName]: {
+            success: false,
+            error: res.error || "テスト実行中にエラーが発生しました",
+            timestamp: new Date().toLocaleString(),
+          },
+        }));
+
+        if (actions && actions.showSnackbar) {
+          actions.showSnackbar(`${daoName}のテストでエラーが発生しました`, "error");
+        }
+      } else {
+        // 成功として処理
+        setTestResults((prev) => ({
+          ...prev,
+          [daoName]: {
+            success: true,
+            data: res.data,
+            timestamp: new Date().toLocaleString(),
+          },
+        }));
+
+        if (actions && actions.showSnackbar) {
+          actions.showSnackbar(`${daoName}のテストが完了しました`, "success");
+        }
+      }
+    } catch (error) {
+      log.error(`${daoName} test error:`, error);
+
+      setTestResults((prev) => ({
+        ...prev,
+        [daoName]: {
+          success: false,
+          error: error.message || "テスト実行中にエラーが発生しました",
+          timestamp: new Date().toLocaleString(),
+        },
+      }));
+
+      if (actions && actions.showSnackbar) {
+        actions.showSnackbar(`${daoName}のテストでエラーが発生しました`, "error");
+      }
+    } finally {
+      setLoading((prev) => ({ ...prev, [daoName]: false }));
+    }
+  };
+
+  /**
+   * すべてのDAOテストを実行する
+   */
+  const executeAllTests = async () => {
+    for (const daoName of daoList) {
+      await executeDaoTest(daoName);
+      // 少し間隔を空けて実行
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+  };
+
+  /**
+   * テスト結果をクリアする
+   */
+  const clearResults = () => {
+    setTestResults({});
+    if (actions && actions.showSnackbar) {
+      actions.showSnackbar("テスト結果をクリアしました", "info");
+    }
+  };
+
+  /**
+   * コピーボタンを生成する関数
+   * @param {string} text - コピーするテキスト
+   * @returns {JSX.Element} コピーボタンコンポーネント
+   */
+  const copyButton = (text) => {
+    return formProps.iconButton("copy", {
+      onClick: () => {
+        navigator.clipboard.writeText(text);
+        if (actions && actions.showSnackbar) {
+          actions.showSnackbar("コードをクリップボードにコピーしました", "success");
+        }
+      },
+    });
+  };
+
+  return [
+    {
+      ...form,
+      testResults,
+      loading,
+      daoList,
+    },
+    {
+      ...formProps,
+      copyButton,
+      executeDaoTest,
+      executeAllTests,
+      clearResults,
+    },
+  ];
+};

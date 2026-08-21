@@ -1,0 +1,51 @@
+/**
+ * ╔═══════════════════════════════════════════════════════════════╗
+ * ║                                                               ║
+ * ║   MetroJS - TypeScript Configuration                          ║
+ * ║   Copyright (c) 2024 Metro Digital Solutions                  ║
+ * ║                                                               ║
+ * ║   Next.jsアプリケーションのTypeScript設定                     ║
+ * ║   型チェックとコンパイル設定                                  ║
+ * ║                                                               ║
+ * ╚═══════════════════════════════════════════════════════════════╝
+ *
+ * このファイルはNext.jsアプリケーションのTypeScript設定を定義します。
+ * 主な機能：
+ * - 型チェックの設定
+ * - コンパイルオプションの設定
+ * - デコレータのサポート
+ * - Next.jsのTypeScriptプラグイン設定
+ *
+ * @file tsconfig.json
+ * @module tsconfig
+ */
+
+{
+  "extends": "../../packages/typescript-config/base.json", // ベースとなるTypeScript設定を継承
+  "include": [
+    // コンパイル対象となるファイルのパターン
+    "next-env.d.ts", // Next.jsの型定義ファイル
+    "**/*.ts", // すべてのTypeScriptファイル
+    "**/*.tsx", // すべてのTypeScript Reactファイル
+    ".next/types/**/*.ts", // Next.jsが生成する型定義ファイル
+    "node_modules/@repo/common/src/**/*.js", // 共通モジュールのJavaScriptファイル
+    "node_modules/@krono-metro/metrojs/src/**/*.js", // MetroJSモジュールのJavaScriptファイル
+    "src/instrumentation.js" // インストゥルメンテーションファイル
+  ],
+  "exclude": [
+    // コンパイルから除外するファイルのパターン
+    "node_modules", // 依存関係のディレクトリ
+    "src/**/__tests__/*" // テストファイル
+  ],
+  "compilerOptions": {
+    // コンパイラオプションの設定
+    "plugins": [
+      // TypeScriptプラグインの設定
+      {
+        "name": "next" // Next.jsのTypeScriptプラグインを有効化
+      }
+    ],
+    "experimentalDecorators": true, // デコレータの実験的サポートを有効化
+    "emitDecoratorMetadata": true // デコレータのメタデータ生成を有効化
+  }
+}

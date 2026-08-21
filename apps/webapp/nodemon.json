@@ -1,0 +1,19 @@
+{
+  "watch": ["server.js", "next.config.mjs", "./src/**/*", "./node_modules/@repo/common/**/*", "./node_modules/@krono-metro/metrojs/**/*", "packages/common/src/**/*"],
+  "ext": "js,json,cjs,mjs",
+  "ignore": ["src/app/**/*.test.js", "src/app/**/*.spec.js", "src/app/**/*.css", "src/app/**/*.scss", "src/app/**/*.module.css", "node_modules/**/*", ".next/**/*", "**/*.test.js", "**/*.spec.js"],
+  "exec": "node scripts/reload-container.js",
+  "env": {
+    "NODE_OPTIONS": "--max-old-space-size=4096"
+  },
+  "encoding": "utf8",
+  "legacyWatch": true,
+  "delay": 500,
+  "verbose": true,
+  "polling": true,
+  "pollingInterval": 1000,
+  "restartable": "rs",
+  "colours": true,
+  "crash": true,
+  "exitcrash": true
+}
